@@ -219,9 +219,15 @@ public class BBMetalVideoWriter {
         videoPixelBufferInput = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: videoInput, sourcePixelBufferAttributes: attributes)
         
         if _hasAudioTrack {
-            let settings: [String : Any] = [AVFormatIDKey : kAudioFormatMPEG4AAC,
-                                            AVNumberOfChannelsKey : 1,
-                                            AVSampleRateKey : AVAudioSession.sharedInstance().sampleRate]
+            let settings: [String : Any] = [
+                AVFormatIDKey: Int(kAudioFormatLinearPCM),
+                AVSampleRateKey: 16000,
+                AVNumberOfChannelsKey: 1,
+                AVLinearPCMBitDepthKey: 16,
+                AVLinearPCMIsBigEndianKey: false,
+                AVLinearPCMIsNonInterleaved: false,
+                AVLinearPCMIsFloatKey: false
+            ]
             audioInput = AVAssetWriterInput(mediaType: .audio, outputSettings: settings)
             audioInput.expectsMediaDataInRealTime = _expectsMediaDataInRealTime
             if !writer.canAdd(audioInput) {
