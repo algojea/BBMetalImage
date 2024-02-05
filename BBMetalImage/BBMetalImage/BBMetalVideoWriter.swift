@@ -221,7 +221,7 @@ public class BBMetalVideoWriter {
         if _hasAudioTrack {
             let settings: [String : Any] = [
                 AVFormatIDKey: Int(kAudioFormatLinearPCM),
-                AVSampleRateKey: 16000,
+                AVSampleRateKey: AVAudioSession.sharedInstance().sampleRate,
                 AVNumberOfChannelsKey: 1,
                 AVLinearPCMBitDepthKey: 16,
                 AVLinearPCMIsBigEndianKey: false,
